@@ -1,0 +1,11 @@
+
+<resources>
+    <string name="app_name">Foods App</string>
+    <string name="search_your_recipes">Search Your Recipes…</string>
+    <string name="meal_categories">Meal Categories</string>
+    <string name="food_and_educacao">Food And Educação</string>
+    <string name="itempesquisa_id_menu">itemPesquisa_id_menu</string>
+    <string name="edufood_name_app">EduFood</string>
+    <string name="search_your_recipes_here">Search your recipes here!</string>
+
+</resources>
