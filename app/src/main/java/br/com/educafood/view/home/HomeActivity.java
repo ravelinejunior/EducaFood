@@ -1,6 +1,7 @@
-package br.com.educafood.view.category;
+package br.com.educafood.view.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.com.educafood.R;
@@ -20,11 +22,15 @@ import br.com.educafood.adapter.RecyclerViewHomeAdapter;
 import br.com.educafood.adapter.ViewPagerHeaderAdapter;
 import br.com.educafood.model.Categories;
 import br.com.educafood.model.Meals;
+import br.com.educafood.view.category.CategoryActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class HomeActivity extends AppCompatActivity implements HomeView {
+
+    public static final String EXTRA_CATEGORY = "category";
+    public static final String EXTRA_POSITION = "position";
 
    @Nullable
     @BindView(R.id.viewPager_Header_home_id)
@@ -92,14 +98,17 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         recyclerViewCategoria.setLayoutManager(layoutManager);
         recyclerViewCategoria.setClipToPadding(false);
         recyclerViewCategoria.setNestedScrollingEnabled(true);
+        recyclerViewHomeAdapter.notifyDataSetChanged();
 
-        //verificar se existe lista de categoria
-        /*for (Categories.Category categoryResultado : category) {
-            Log.i("ResultadoCategoria", categoryResultado.getStrCategory());
-        }
-*/
-        recyclerViewHomeAdapter.setOnItemClickListener((view, position) ->
-                Snackbar.make(view, "Categoria: " + category.get(position).getStrCategory(), Snackbar.LENGTH_SHORT).show());
+        //enviar
+        recyclerViewHomeAdapter.setOnItemClickListener((view, position) -> {
+            Intent intent = new Intent(this, CategoryActivity.class);
+            intent.putExtra(EXTRA_CATEGORY, (Serializable) category);
+            intent.putExtra(EXTRA_POSITION,position);
+            startActivity(intent);
+        });
+
+
     }
 
     @Override

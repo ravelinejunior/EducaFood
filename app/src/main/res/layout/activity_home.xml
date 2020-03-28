@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".view.category.HomeActivity">
+    tools:context=".view.home.HomeActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                     android:drawablePadding="10dp"
                     android:focusable="true"
                     android:padding="10dp"
-                    android:text="@string/search_your_recipes_here"
+                    android:text="@string/procure_aqui_sua_receita_search_your_recipe"
                     android:textColor="@color/colorPrimaryLight"
                     android:textSize="18sp" />
 
@@ -120,7 +120,7 @@
                 android:background="@color/colorPrimaryLight"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/food_and_educacao"
+                android:text="@string/edufood_name_app"
                 android:textColor="@color/colorWhite" />
 
         </RelativeLayout>

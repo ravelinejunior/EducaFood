@@ -1,4 +1,4 @@
-package br.com.educafood.view.category;
+package br.com.educafood.view.home;
 
 import java.util.List;
 
