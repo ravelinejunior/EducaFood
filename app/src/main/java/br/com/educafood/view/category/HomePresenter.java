@@ -1,4 +1,4 @@
-package br.com.educafood.view.home;
+package br.com.educafood.view.category;
 
 import br.com.educafood.Utils;
 import br.com.educafood.model.Categories;

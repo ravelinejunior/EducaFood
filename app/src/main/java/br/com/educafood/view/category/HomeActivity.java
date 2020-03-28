@@ -1,4 +1,4 @@
-package br.com.educafood.view.home;
+package br.com.educafood.view.category;
 
 import android.content.Context;
 import android.os.Bundle;
