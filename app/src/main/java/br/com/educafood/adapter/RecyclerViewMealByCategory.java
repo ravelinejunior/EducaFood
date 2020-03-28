@@ -75,6 +75,7 @@ public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerVie
 
     public void setOnItemClickListener(ClickListener clickListener) {
         RecyclerViewMealByCategory.clickListener = clickListener;
+
     }
 
 

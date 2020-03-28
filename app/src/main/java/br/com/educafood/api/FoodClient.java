@@ -10,12 +10,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FoodClient {
 
-    private static final String BASE_URL = "https://www.themealdb.com/api/json/v2/1/";
+    public static String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
+    public static String BASE_URL_V2 = "https://www.themealdb.com/api/json/v2/1/";
 
     public static Retrofit getFoodClient() {
 
         return new Retrofit.Builder().
                 baseUrl(BASE_URL).
+                client(provideOkHttp()).
+                addConverterFactory(GsonConverterFactory.create()).
+                build();
+
+    }
+
+    public static Retrofit getFoodClientV2() {
+
+        return new Retrofit.Builder().
+                baseUrl(BASE_URL_V2).
                 client(provideOkHttp()).
                 addConverterFactory(GsonConverterFactory.create()).
                 build();

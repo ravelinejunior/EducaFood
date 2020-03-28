@@ -1,6 +1,7 @@
 
 package br.com.educafood.view.category;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,15 +20,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.com.educafood.R;
 import br.com.educafood.Utils;
 import br.com.educafood.adapter.RecyclerViewMealByCategory;
 import br.com.educafood.model.Meals;
+import br.com.educafood.view.detail.DetailActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static br.com.educafood.view.home.HomeActivity.EXTRA_DETAIL;
 
 public class CategoryFragment extends Fragment implements CategoryView {
 
@@ -57,6 +62,7 @@ public class CategoryFragment extends Fragment implements CategoryView {
         super.onViewCreated(view, savedInstanceState);
 
         if (getArguments() != null){
+            textCategory.isTextSelectable();
             textCategory.setText(getArguments().getString("EXTRA_DATA_DESC"));
 
             Picasso.get().
@@ -97,9 +103,15 @@ public class CategoryFragment extends Fragment implements CategoryView {
         recyclerView.setAdapter(recyclerViewMealByCategoryAdapter);
         recyclerViewMealByCategoryAdapter.notifyDataSetChanged();
 
+        //enviar
         recyclerViewMealByCategoryAdapter.setOnItemClickListener((view, position) -> {
-            Toast.makeText(getActivity(), "Refeição: "+meals.get(position).getStrInstructions(), Toast.LENGTH_SHORT).show();
+            TextView mealName = view.findViewById(R.id.mealName);
+            Intent i = new Intent(getActivity(), DetailActivity.class);
+            i.putExtra(EXTRA_DETAIL, (Serializable) mealName.getText().toString());
+            startActivity(i);
         });
+
+
 
 
     }

@@ -27,6 +27,10 @@
             android:theme="@style/AppTheme"
             android:screenOrientation="fullSensor"
             android:label="Category"/>
+
+        <activity android:name=".view.detail.DetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
     </application>
 
 </manifest>

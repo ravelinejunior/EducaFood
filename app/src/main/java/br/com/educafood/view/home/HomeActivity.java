@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import br.com.educafood.adapter.ViewPagerHeaderAdapter;
 import br.com.educafood.model.Categories;
 import br.com.educafood.model.Meals;
 import br.com.educafood.view.category.CategoryActivity;
+import br.com.educafood.view.detail.DetailActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -31,6 +33,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
 
     public static final String EXTRA_CATEGORY = "category";
     public static final String EXTRA_POSITION = "position";
+    public static final String EXTRA_DETAIL = "detail";
 
    @Nullable
     @BindView(R.id.viewPager_Header_home_id)
@@ -39,7 +42,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @Nullable
     @BindView(R.id.recyclerView_category_id_home)
     RecyclerView recyclerViewCategoria;
-
     HomePresenter homePresenter;
 
 
@@ -50,11 +52,10 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
 
         //instanciar ButterKnife Bind
         ButterKnife.bind(this);
-       /* viewPagerMeal = findViewById(R.id.viewPager_Header_home_id);
-        recyclerViewCategoria = findViewById(R.id.recyclerView_category_id_home);*/
 
         homePresenter = new HomePresenter(this); // passando this ele vai pegar o implements homeView
-        homePresenter.getMeals();
+        //homePresenter.getMeals(); com versão v1
+        homePresenter.getMealsV2();
         homePresenter.getCategories();
     }
 
@@ -86,8 +87,13 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         viewPagerMeal.setPadding(20, 0, 150, 0);
         viewPagerHeaderAdapter.notifyDataSetChanged();
 
-        viewPagerHeaderAdapter.setOnItemClickListener((v, position) ->
-                Snackbar.make(v, "Prato: " + meal.get(position).getStrMeal(), Snackbar.LENGTH_SHORT).show());
+        viewPagerHeaderAdapter.setOnItemClickListener((view, position) -> {
+            TextView mealName = view.findViewById(R.id.mealName);
+            Intent i = new Intent(getContext(), DetailActivity.class);
+            i.putExtra(EXTRA_DETAIL, (Serializable) mealName.getText().toString());
+            startActivity(i);
+
+        });
     }
 
     @Override
@@ -98,8 +104,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         recyclerViewCategoria.setLayoutManager(layoutManager);
         recyclerViewCategoria.setClipToPadding(false);
         recyclerViewCategoria.setNestedScrollingEnabled(true);
-        recyclerViewHomeAdapter.notifyDataSetChanged();
-
         //enviar
         recyclerViewHomeAdapter.setOnItemClickListener((view, position) -> {
             Intent intent = new Intent(this, CategoryActivity.class);
@@ -107,6 +111,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
             intent.putExtra(EXTRA_POSITION,position);
             startActivity(intent);
         });
+        recyclerViewHomeAdapter.notifyDataSetChanged();
 
 
     }

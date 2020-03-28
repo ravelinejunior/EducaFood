@@ -7,7 +7,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-class HomePresenter {
+public class HomePresenter {
 
     private HomeView view;
 
@@ -18,6 +18,33 @@ class HomePresenter {
     void getMeals() { // recuperando os valores das refeições
         view.showLoading();
         Call<Meals> mealsCall = Utils.getApi().getMeal();
+        mealsCall.enqueue(new Callback<Meals>() {
+            @Override
+            public void onResponse(Call<Meals> call, Response<Meals> response) {
+                view.hideLoading();
+
+                    if (response.isSuccessful() && response.body() != null) {
+                        view.setMeals(response.body().getMeals());
+                    } else {
+                        view.onErrorLoading(response.message());
+                    }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Meals> call, Throwable t) {
+                view.hideLoading();
+                view.onErrorLoading(t.getMessage());
+            }
+        });
+
+
+    }
+
+    void getMealsV2() { // recuperando os valores das refeições
+        view.showLoading();
+        Call<Meals> mealsCall = Utils.getApiV2().getMeal();
         mealsCall.enqueue(new Callback<Meals>() {
             @Override
             public void onResponse(Call<Meals> call, Response<Meals> response) {

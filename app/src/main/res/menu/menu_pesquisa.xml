@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Developed by Haerul Muttaqin
+  Last modified 22/03/20 22:14
+  Subscribe : https://www.youtube.com/haerulmuttaqin
+  Copyright (c) 2020. All rights reserved
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="@string/itempesquisa_id_menu"
+        android:id="@+id/pesquisa_menu"
+        android:icon="@drawable/ic_search_primary_light"
+        app:showAsAction="always"
+
+        />
+
+</menu>

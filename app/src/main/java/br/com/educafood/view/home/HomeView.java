@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.educafood.model.Categories;
 import br.com.educafood.model.Meals;
 
-interface HomeView {
+public interface HomeView {
 
     void showLoading();
 
